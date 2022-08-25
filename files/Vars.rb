@@ -8,4 +8,5 @@ p MY_CONST
 up_case = 'string'.upcase
 p up_case
 
+p '5'.to_i
 p '5'.to_f
