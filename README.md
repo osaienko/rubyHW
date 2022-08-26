@@ -20,5 +20,13 @@ Comments: `#` and TODO: multiline comment?
 
 Ruby does not require `;` (madness)
 
+The spaceship operator will return `1`, `0`, or `−1` depending on the value of the left argument relative to the right argument.
+```
+a <=> b :=
+if a < b then return -1
+if a = b then return  0
+if a > b then return  1
+if a and b are not comparable then return nil
+```
 ### Methods
 Methods in Ruby always return something, "void" returns `nil`.
