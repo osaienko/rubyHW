@@ -69,3 +69,27 @@ cats = %w[Ruby Peach Spot Jack Captain] # Intellij: array of string literals ['R
 cats.each { |cat| p cat}
 cats.each_index { |index| p index}
 cats.each_with_index { |cat, index| p "#{cat} number #{index}"}
+
+cats.reverse # reverse and return a new array
+cats.reverse! # returns the string it is called on so (mutates)
+
+# each vs map
+
+characters = %w[Simba Scar Mufasa Timon Pumbaa]
+
+result_each = characters.each { |character| character.upcase }
+
+# ["Simba", "Scar", "Mufasa", "Timon", "Pumbaa"]
+p characters
+# ["Simba", "Scar", "Mufasa", "Timon", "Pumbaa"]
+p result_each
+
+result_map = characters.map { |character| character.upcase }
+
+# ["Simba", "Scar", "Mufasa", "Timon", "Pumbaa"]
+p characters
+# ["SIMBA", "SCAR", "MUFASA", "TIMON", "PUMBAA"]
+p result_map
+
+# The difference between each and map lies in the return value: “each”
+# returns its receiver, but “map” returns a new array

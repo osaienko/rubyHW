@@ -30,3 +30,4 @@ if a and b are not comparable then return nil
 ```
 ### Methods
 Methods in Ruby always return something, "void" returns `nil`.
+`return` can be avoided, a function will always return the result of the last line.
