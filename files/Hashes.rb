@@ -61,5 +61,96 @@ p user[:first_name] # Sergio
 p user[:age] # nil, no such key
 p user[:height] # nil, actually set to nil
 # instead of checking user user.key?(:height) use .fetch
-p user.fetch(:age) # produce exception -> key not found: :age (KeyError)
+# p user.fetch(:age) # produce exception -> key not found: :age (KeyError)
 p user.fetch(:height) # nil, actually set to nil
+
+p user.length # 3 -> amount of objects, e.g. key/value pairs
+
+p empty_hash.empty? # true
+
+# p Hash.methods to see all methods
+
+# adding to the hash
+user[:sex] = 'M' # add or override
+p user
+# or
+user.store(:is_alive, false) # intellij: false -> incompatible type, but it works (?)
+p user
+# or (!)
+user.merge!({ age: nil })
+p user
+
+
+# iteration
+user.each do |trait|
+  # trait here is an array, each time, with the key in 0, and value in 1
+  # e.g. [:first_name, "Sergio"]
+  p trait
+end
+
+# instead key + value can be used
+user.each do |key, value|
+  # "the key is first_name and the value is Sergio"
+  p "the key is #{key} and the value is #{value}"
+end
+
+# iterating over keys
+user.each_key do |key|
+  # :first_name, :last_name, and so forth
+  p key
+end
+
+# iterating over values
+user.each_value do |value|
+  # "Sergio", "Leone", nil, and so forth
+  p value
+end
+
+# hash as an argument
+def i_need_hash(hash)
+  hash.each { |elem|
+    p elem
+  }
+end
+
+i_need_hash({
+              'key_1' => "value1",
+              'key_2' => "value2"
+            })
+
+# also can pass without the {}, the result is the same
+i_need_hash('key_1' => "value1", 'key_2' => "value2")
+
+# remove a pair
+hash_to_modify = {key_1: "value1", key_2: "value2"}
+removed_value = hash_to_modify.delete(:key_1) # also returns the removed value
+p hash_to_modify #success
+p removed_value
+
+
+# merge, does not change the original one, but returns the result (merge! above)
+name = {name: "Clint"}
+last_name = {last_name: 'Eastwood'}
+
+user = name.merge(last_name)
+
+# {:name=>"Clint"}
+p name
+# {:last_name=>"Eastwood"}
+p last_name
+# {:name=>"Clint", :last_name=>"Eastwood"}
+p user
+
+# select
+# Returns a new \Hash object whose entries are those for which the block returns a truthy value
+# same as hash.filter
+shop = {water: 2, coca_cola: 0, rum: 5, orange_juice: 1}
+
+to_refill = shop.select {|product, amount| amount <=1}
+# {:coca_cola=>0, :orange_juice=>1}
+p to_refill
+
+# anti .select
+dont_refill = shop.reject {|product, amount| amount <=1}
+# {:water=>2, :rum=>5}
+p dont_refill
