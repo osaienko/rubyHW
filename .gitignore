@@ -57,3 +57,6 @@ build-iPhoneSimulator/
 
 # intellij
 .idea
+
+# folder with temp files, e.g. when checking the write/read functionality
+/temp
