@@ -106,3 +106,61 @@ p numbers.map(&method(:multiply_by_2))
 
 ### Lambdas
 
+def i_accept_block(&block)
+  block.call
+end
+
+#<Proc:0x00007fe48e05fb48 files/Blocks.rb:113>
+proc = Proc.new { puts "I'm a proc"}
+#<Proc:0x00007fe48e05f990 files/Blocks.rb:114 (lambda)>
+lambda = -> { puts "I'm a lambda"}
+
+# check if lambda?
+# lambda.lambda? -> boolean
+p proc
+p lambda
+
+i_accept_block(&lambda)
+
+# passing arguments
+proc_with_args = Proc.new { |a,b| puts "I'm #{a} and also #{b} (proc)"}
+lambda_with_args = -> (a,b) { puts "I'm #{a} and also #{b} (lambda)"}
+
+# both return nil, the code works as expected
+p proc_with_args.call(1,2)
+p lambda_with_args.call(1,2)
+
+# both return nil, not passed param is passed as nil in Proc, but lambda expects all params
+p proc_with_args.call(1)
+# wrong number of arguments (given 1, expected 2) (ArgumentError)
+# p lambda_with_args.call(1)
+
+# return from Proc stops the method, lambda does not do that
+
+def accepts_block_and_puts_stuff(&block)
+  puts "method start"
+  block.call
+  puts "method end"
+end
+
+
+proc_returns = Proc.new do
+  puts "proc"
+  return
+end
+
+lambda_returns = -> do
+  puts "lambda"
+  return
+end
+
+
+# method start
+# proc
+# accepts_block_and_puts_stuff(&proc_returns) # commented so that the program does not stop
+# method start
+# lambda
+# method end
+accepts_block_and_puts_stuff(&lambda_returns)
+
+## Proc behaves the same way as a block, lambda doesn't
