@@ -31,3 +31,12 @@ if a and b are not comparable then return nil
 ### Methods
 Methods in Ruby always return something, "void" returns `nil`.
 `return` can be avoided, a function will always return the result of the last line.
+....
+
+### Modules
+```
+prepend Module
+extend Module
+include Module
+```
+Good article: https://medium.com/@leo_hetsch/ruby-modules-include-vs-prepend-vs-extend-f09837a5b073

@@ -8,7 +8,7 @@ def user_input
   letter
 end
 
-def handle_input( word, correct_letters, incorrect_letters)
+def handle_input(word, correct_letters, incorrect_letters)
   input = user_input
   return if correct_letters.include?(input) || incorrect_letters.include?(input)
 
