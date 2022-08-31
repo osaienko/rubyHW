@@ -136,6 +136,8 @@ class Car
   # In Ruby, a protected method (or protected message handler) can only respond to a message
   # with an implicit/explicit receiver (object) of the same family. It also cannot respond to
   # a message sent from outside of the protected message handler context.
+  #
+  # Basically only self, or object of the same Class
   protected
   def protected_make_sound
     puts "bip_protected + #{@brand}"
