@@ -64,7 +64,7 @@ class Sheep
 
   # override
   def to_s
-    "#{@name} sheep is of #{@fur_color} color as and is #{@age} years old"
+    "#{@name} sheep, am of #{@fur_color} color as and is #{@age} years old"
   end
 end
 
@@ -182,4 +182,22 @@ car_five_tires = Car.new(brand: 'Five Tires Type', number_of_wheels: 5)
 car.compare_wheels_make_sound(car_three_tires)
 car.compare_wheels_make_sound(car_five_tires)
 
+## Inheritance
+
+#Object
+puts car.class.superclass
+#BasicObject
+puts car.class.superclass.superclass
+
+# extends == "<"
+
+require_relative 'Animal.rb'
+require_relative 'Donkey.rb'
+require_relative 'Goat.rb'
+
+donkey = Donkey.new(name: 'Donkey')
+goat = Goat.new(name: 'Goat')
+
+donkey.voice
+goat.voice
 
