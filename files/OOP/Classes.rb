@@ -201,3 +201,95 @@ goat = Goat.new(name: 'Goat')
 donkey.voice
 goat.voice
 
+## static vars and methods
+
+
+class Human
+  @@population = 0
+  @scientific_name = 'Homo sapiens'
+
+  attr_reader :head
+
+  def self.population
+    @@population
+  end
+
+  def self.scientific_name
+    @scientific_name
+  end
+
+  def self.scientific_name=(new_name)
+    @scientific_name=new_name
+  end
+
+  def self.reset_population(number_of_people = 0)
+    @@population = number_of_people
+  end
+
+  def initialize
+    @@population += 1
+    @head = 1
+  end
+end
+
+george = Human.new
+p george.head
+
+jimmy = Human.new
+james = Human.new
+p "population is #{Human.population}"
+
+Human.reset_population
+p "new population is #{Human.population}"
+
+p Human.scientific_name
+
+
+# diff between @@ and @ on the class level vars
+puts '________________________________________'
+class Laptop
+  @@brand_name = "unknown"
+  @number_of_screens = 1
+
+  def self.brand_name
+    @@brand_name
+  end
+
+  def self.brand_name=(value)
+    @@brand_name = value
+  end
+
+  def self.number_of_screens
+    @number_of_screens
+  end
+
+  def self.number_of_screens=(value)
+    @number_of_screens = value
+  end
+
+end
+
+class MacBook < Laptop
+
+end
+
+# works
+p Laptop.brand_name
+p Laptop.number_of_screens
+
+p MacBook.brand_name
+p MacBook.number_of_screens # nil
+
+# @vars are not inherited, while @@ are inherited
+# @ -> instance variable or (!) Class level instance variable (!) in the example above
+# @@ Class level variable
+
+# another tricky thing - setting @@ from the child class overrides it in the parant class too
+MacBook.brand_name = 'Apple'
+p MacBook.brand_name # Apple
+p Laptop.brand_name # Apple
+
+### "It's a common idiom in Ruby to track class-level
+### data with an instance variable on the class itself"
+
+## This file is getting too big, move to another one -> Classes_more
