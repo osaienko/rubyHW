@@ -158,3 +158,37 @@ puts sofa
 puts chair_light == chair_heavy
 puts chair_light > chair_heavy
 puts chair_light < sofa
+
+### Enumerable module
+puts "Enumerable module"
+class Garage
+  include Enumerable
+  attr_accessor :parking
+
+  def initialize
+    @parking = []
+  end
+
+  def park_car(car)
+    @parking << car
+  end
+
+  def each
+    parking.each do |item|
+      yield item
+    end
+  end
+
+end
+
+garage_1 = Garage.new
+garage_1.park_car("mercedes")
+garage_1.park_car("audi")
+garage_1.park_car("toyota")
+
+# after implementing 'each' from the Enumerable module no need to call:
+# p garage_1.parking.any? {|car| car == 'audi'}
+# can call this instead:
+p garage_1.any? {|car| car == 'audi'}
+
+p garage_1.each {|car| p car == 'mercedes'}
