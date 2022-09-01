@@ -103,3 +103,58 @@ end
 
 # "swimming", NOT "Ship"
 Ship.new.swim
+
+### Comparable module
+
+# [Numeric, Comparable, Object, Kernel, BasicObject]
+p Numeric.ancestors
+# [String, Comparable, Object, Kernel, BasicObject]
+p String.ancestors
+
+class Furniture
+  # need to def <=> method
+  include Comparable
+
+  attr_accessor :weight
+
+  def initialize(weight)
+    @weight = weight
+  end
+
+  def to_s
+    "I weight exactly #{@weight} kilos"
+  end
+
+  def <=>(other)
+    # if self.weight < other.weight
+    #   -1
+    # elsif self < other
+    #   1
+    # elsif self ==  other
+    #   0
+    # end
+    self.weight <=> other.weight
+  end
+
+end
+
+class Chair < Furniture
+
+end
+
+class Sofa < Furniture
+
+end
+
+chair_heavy = Chair.new(25)
+chair_light = Chair.new(10)
+sofa = Sofa.new(35)
+
+puts chair_heavy
+puts chair_light
+puts sofa
+
+# <=> allows these:
+puts chair_light == chair_heavy
+puts chair_light > chair_heavy
+puts chair_light < sofa
